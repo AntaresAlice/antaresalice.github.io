@@ -275,7 +275,9 @@ if(!norunFlag){
 			});
 			$('#talk_send').on('click',function(){
 				var info_ = $('#AIuserText').val();
+				//alert(info_);
 				var userid_ = $('#AIuserName').val();
+				var username_ = 'type%3Dbbs'
 				if(info_ == "" ){
 					showMessage('写点什么吧！',0);
 					return;
@@ -286,19 +288,30 @@ if(!norunFlag){
 				}
 				showMessage('思考中~', 0);
 				$.ajax({
-					type: 'POST',
+					type: 'GET',
 					url: talkAPI,
 					data: {
-						"info":info_,
-						"userid":userid_
+						"keyWord":info_,
+						"userName":username_
 					},
 					success: function(res) {
-						if(res.code !== 100000){
+						var jsonData = JSON.stringify(res);// 转成JSON格式
+						//alert(jsonData);
+						var objt = eval('('+jsonData+')');
+						//alert(objt);
+						
+						var obj = JSON.parse(jsonData);
+						//alert(obj.reply);
+							
+
+						var str = jsonData.split('"');
+						//alert(str[9]);
+						if(res.isSuccess !== true){
 							talkValTimer();
-							showMessage('似乎有什么错误，请和站长联系！',0);
+							showMessage('伊斯不懂诶~~',0);
 						}else{
 							talkValTimer();
-							showMessage(res.text,0);
+							showMessage(str[9],0);
 						}
 						console.log(res);
 						$('#AIuserText').val("");
