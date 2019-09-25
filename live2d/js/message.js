@@ -286,6 +286,16 @@ if(!norunFlag){
 					showMessage('聊之前请告诉我你的名字吧！',0);
 					return;
 				}
+				if(userid_ == "page"){
+					try{
+						var passes = message_Path.substr(0,message_Path.length-7) + info_;
+						window.location.href=passes;
+						showMessage('记得回来看伊斯哦~~',0);
+					}catch(e){
+						showMessage('伊斯不懂诶~~',0);
+						return;
+					}
+				}
 				showMessage('思考中~', 0);
 				$.ajax({
 					type: 'GET',
@@ -296,16 +306,13 @@ if(!norunFlag){
 					},
 					success: function(res) {
 						var jsonData = JSON.stringify(res);// 转成JSON格式
-						//alert(jsonData);
 						var objt = eval('('+jsonData+')');
-						//alert(objt);
 						
 						var obj = JSON.parse(jsonData);
-						//alert(obj.reply);
 							
 
 						var str = jsonData.split('"');
-						//alert(str[9]);
+
 						if(res.isSuccess !== true){
 							talkValTimer();
 							showMessage('伊斯不懂诶~~',0);
