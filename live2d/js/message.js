@@ -320,7 +320,8 @@ if(!norunFlag){
 							showMessage('伊斯不懂诶~~',0);
 						}else{
 							talkValTimer();
-							showMessage(str[9],0);
+							//showMessage(str[9],0);
+							showMessage('聊天机器人挂掉了呢~~',0)
 						}
 						console.log(res);
 						$('#AIuserText').val("");
